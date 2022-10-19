@@ -25,8 +25,19 @@ public class Drivetrain extends SubsystemBase {
 
   }
   
-  public void drive(double speed_fl, double speed_fr, double speed_bl, double speed_br) {
-    m_MecanumDrive.MecanumDrive(speed_fl, speed_fr, speed_bl, speed_br);
+  public void drive(double x, double y) {
+    if (y != 0){
+      m_drive_bl.set(y);
+      m_drive_br.set(y);
+      m_drive_fl.set(y);
+      m_drive_fr.set(y);
+    }
+    else if (x != 0){
+      m_drive_bl.set(-x);
+      m_drive_br.set(x);
+      m_drive_fl.set(x);
+      m_drive_fr.set(-x);
+    }
   }
 
   @Override
