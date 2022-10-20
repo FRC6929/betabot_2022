@@ -7,6 +7,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.RobotState;
 import frc.robot.subsystems.Drivetrain;
 
 public class DriveCommand extends CommandBase {
@@ -17,7 +18,7 @@ public class DriveCommand extends CommandBase {
 
   double y;
   double x;
-
+  double z;
   /** Creates a new DriveCommand. */
   public DriveCommand(Joystick j, XboxController g, Drivetrain drivetrain){
   m_drivetrain = drivetrain;
@@ -36,16 +37,25 @@ public class DriveCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    //Joystick mode
+    if(RobotState.joystick==true){
     y = -m_Joystick.getY();
     x = -m_Joystick.getX();
-
-    m_drivetrain.drive(y,x);
+    z = -m_Joystick.getZ();
+    }
+    else{
+      x = -m_Gamepad.getRawAxis(0);
+      y = m_Gamepad.getRawAxis(1);
+      z = -m_Gamepad.getRawAxis(2);
+    }
+    m_drivetrain.drive(y,x,z);
   }
+
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-
+    m_drivetrain.drive(0,0);
   }
   // Returns true when the command should end.
   @Override
