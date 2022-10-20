@@ -55,7 +55,7 @@ public class DriveCommand extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_drivetrain.drive(0,0);
+    m_drivetrain.drive(0,0,0);
   }
   // Returns true when the command should end.
   @Override
