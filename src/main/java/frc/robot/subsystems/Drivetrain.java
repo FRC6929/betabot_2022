@@ -22,10 +22,9 @@ public class Drivetrain extends SubsystemBase {
 
   /** Creates a new drivetrain. */
   public Drivetrain() {
-
   }
   
-  public void drive(double x, double y) {
+  public void drive(double x, double y, double z) {
     if (y != 0){
       m_drive_bl.set(y);
       m_drive_br.set(y);
@@ -37,6 +36,30 @@ public class Drivetrain extends SubsystemBase {
       m_drive_br.set(x);
       m_drive_fl.set(x);
       m_drive_fr.set(-x);
+    }
+    else if(x >0.3 && y > 0.3){//haut droit diagonal
+    m_drive_fl.set(y);
+    m_drive_br.set(y);
+    m_drive_fr.set(0);
+    m_drive_bl.set(0);
+    }
+    else if(x < -0.3 && y < -0.3){//bas gauche diagonal
+      m_drive_fl.set(y);
+      m_drive_br.set(y);
+      m_drive_fr.set(0);
+      m_drive_bl.set(0);
+    }
+    else if(x > 0.3 && y < -0.3){//bas droit diagonal
+      m_drive_fl.set(0);
+      m_drive_br.set(0);
+      m_drive_fr.set(y);
+      m_drive_bl.set(y);
+    }
+    else if(x < -0.3 && y > 0.3){//haut gauche diagonal
+      m_drive_fl.set(0);
+      m_drive_br.set(0);
+      m_drive_fr.set(y);
+      m_drive_bl.set(y);
     }
   }
 
