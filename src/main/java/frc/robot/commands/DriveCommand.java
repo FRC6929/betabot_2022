@@ -21,11 +21,12 @@ public class DriveCommand extends CommandBase {
   double z;
   /** Creates a new DriveCommand. */
   public DriveCommand(Joystick j, XboxController g, Drivetrain drivetrain){
-  m_drivetrain = drivetrain;
-  m_Joystick = j;
-  m_Gamepad = g;
+    m_drivetrain = drivetrain;
+    m_Joystick = j;
+    m_Gamepad = g;
 
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(drivetrain);
   }
 
   // Called when the command is initially scheduled.

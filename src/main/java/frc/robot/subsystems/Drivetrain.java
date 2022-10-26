@@ -7,7 +7,7 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -17,50 +17,36 @@ public class Drivetrain extends SubsystemBase {
   private final CANSparkMax m_drive_fr = new CANSparkMax(Constants.ConsDrivetrain.Motor_Fr, MotorType.kBrushless);
   private final CANSparkMax m_drive_bl = new CANSparkMax(Constants.ConsDrivetrain.Motor_Bl, MotorType.kBrushless);
   private final CANSparkMax m_drive_br = new CANSparkMax(Constants.ConsDrivetrain.Motor_Br, MotorType.kBrushless);
+  private double ySpeed;
+  private double xSpeed;
+  private double zSpeed;
 
-  private final MecanumDrive m_MecanumDrive = new MecanumDrive(m_drive_fl, m_drive_fr, m_drive_bl, m_drive_br );
 
   /** Creates a new drivetrain. */
   public Drivetrain() {
+    m_drive_br.setInverted(true);
   }
   
-  public void drive(double x, double y, double z) {
-    if (y != 0){
-      m_drive_bl.set(y);
-      m_drive_br.set(y);
-      m_drive_fl.set(y);
-      m_drive_fr.set(y);
-    }
-    else if (x != 0){
-      m_drive_bl.set(-x);
-      m_drive_br.set(x);
-      m_drive_fl.set(x);
-      m_drive_fr.set(-x);
-    }
-    else if(x >0.3 && y > 0.3){//haut droit diagonal
-    m_drive_fl.set(y);
-    m_drive_br.set(y);
-    m_drive_fr.set(0);
-    m_drive_bl.set(0);
-    }
-    else if(x < -0.3 && y < -0.3){//bas gauche diagonal
-      m_drive_fl.set(y);
-      m_drive_br.set(y);
-      m_drive_fr.set(0);
-      m_drive_bl.set(0);
-    }
-    else if(x > 0.3 && y < -0.3){//bas droit diagonal
-      m_drive_fl.set(0);
-      m_drive_br.set(0);
-      m_drive_fr.set(y);
-      m_drive_bl.set(y);
-    }
-    else if(x < -0.3 && y > 0.3){//haut gauche diagonal
-      m_drive_fl.set(0);
-      m_drive_br.set(0);
-      m_drive_fr.set(y);
-      m_drive_bl.set(y);
-    }
+  private final MecanumDrive m_MecanumDrive = new MecanumDrive(m_drive_fl, m_drive_bl, m_drive_fr, m_drive_br );
+
+
+  public void drive(double y, double x, double z) {
+  if (Math.abs(y) > 0.3){
+    ySpeed = y;
+  }else{
+    ySpeed = 0;
+  }
+  if (Math.abs(x) > 0.3){
+    xSpeed = x;
+  }else{
+    xSpeed = 0;
+  }
+  if (Math.abs(z) > 0.3){
+    zSpeed = z;
+  }else{
+    zSpeed = 0;
+  }
+    m_MecanumDrive.driveCartesian(ySpeed, xSpeed, -zSpeed);
   }
 
   @Override
