@@ -29,7 +29,7 @@ public class Drivetrain extends SubsystemBase {
   private final MecanumDrive m_MecanumDrive = new MecanumDrive(m_drive_fl, m_drive_bl, m_drive_fr, m_drive_br );
 
 
-  public void drive(double y, double x, double z) {
+  public void drive(double y, double x, double z, double angle) {
   if (Math.abs(y) > 0.2){
     ySpeed = (Math.abs(y)-0.2)/0.8*(Math.abs(y)/y);
   }else{
@@ -46,7 +46,7 @@ public class Drivetrain extends SubsystemBase {
   }else{
     zSpeed = 0;
   }
-    m_MecanumDrive.driveCartesian(ySpeed, -xSpeed, -zSpeed);
+    m_MecanumDrive.driveCartesian(ySpeed, -xSpeed, -zSpeed, -angle);
   }
 
   @Override

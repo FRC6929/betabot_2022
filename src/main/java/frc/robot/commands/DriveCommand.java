@@ -4,8 +4,11 @@
 
 package frc.robot.commands;
 
+import com.kauailabs.navx.frc.AHRS;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotState;
 import frc.robot.subsystems.Drivetrain;
@@ -15,15 +18,17 @@ public class DriveCommand extends CommandBase {
 
   private final Joystick m_Joystick;
   private final XboxController m_Gamepad;
+  private final AHRS m_navx;
 
   double y;
   double x;
   double z;
   /** Creates a new DriveCommand. */
-  public DriveCommand(Joystick j, XboxController g, Drivetrain drivetrain){
+  public DriveCommand(Joystick j, XboxController g, Drivetrain drivetrain, AHRS navx){
     m_drivetrain = drivetrain;
     m_Joystick = j;
     m_Gamepad = g;
+    m_navx = navx;
 
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(drivetrain);
@@ -32,13 +37,16 @@ public class DriveCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-
+    m_navx.reset();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     //Joystick mode
+    SmartDashboard.putNumber(   "IMU_Yaw",              m_navx.getYaw());
+    SmartDashboard.putNumber(   "IMU_Pitch",            m_navx.getPitch());
+    SmartDashboard.putNumber(   "IMU_Roll",             m_navx.getRoll());
     if(RobotState.joystick==true){
     y = -m_Joystick.getY();
     x = -m_Joystick.getX();
@@ -49,14 +57,14 @@ public class DriveCommand extends CommandBase {
       y = m_Gamepad.getRawAxis(1);
       z = -m_Gamepad.getRawAxis(2);
     }
-    m_drivetrain.drive(y,x,z);
+    m_drivetrain.drive(y,x,z, m_navx.getYaw());
   }
 
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_drivetrain.drive(0,0,0);
+    m_drivetrain.drive(0.0,0.0,0.0,0.0);
   }
   // Returns true when the command should end.
   @Override
