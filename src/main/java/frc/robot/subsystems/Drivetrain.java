@@ -32,17 +32,18 @@ public class Drivetrain extends SubsystemBase {
 
   public void drive(double y, double x, double z) {
   if (Math.abs(y) > 0.3){
-    ySpeed = 0.7/(Math.abs(y)-0.3)*(Math.abs(y)/y);
+    ySpeed = (Math.abs(y)-0.3)/0.7*(Math.abs(y)/y);
+    System.out.println(ySpeed);
   }else{
     ySpeed = 0;
   }
   if (Math.abs(x) > 0.3){
-    xSpeed = 0.7/(Math.abs(x)-0.3)*(Math.abs(x)/x);
+    xSpeed = (Math.abs(x)-0.3)/0.7*(Math.abs(x)/x);
   }else{
     xSpeed = 0;
   }
   if (Math.abs(z) > 0.3){
-    zSpeed = 0.7/(Math.abs(z)-0.3)*(Math.abs(z)/z);
+    zSpeed = (Math.abs(z)-0.3)/0.7*(Math.abs(z)/z);
   }else{
     zSpeed = 0;
   }
