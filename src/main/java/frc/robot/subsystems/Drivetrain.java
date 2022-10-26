@@ -40,8 +40,8 @@ public class Drivetrain extends SubsystemBase {
   }else{
     xSpeed = 0;
   }
-  if (Math.abs(z) > 0.3){
-    zSpeed = .25*(Math.abs(z)-0.3)/0.7*(Math.abs(z)/z);
+  if (Math.abs(z) > 0.4){
+    zSpeed = .25*(Math.abs(z)-0.4)/0.6*(Math.abs(z)/z);
     System.out.println(zSpeed);
   }else{
     zSpeed = 0;
