@@ -24,30 +24,31 @@ public class Drivetrain extends SubsystemBase {
 
   /** Creates a new drivetrain. */
   public Drivetrain() {
-    m_drive_br.setInverted(true);
+    m_drive_fr.setInverted(true);
+
   }
   
   private final MecanumDrive m_MecanumDrive = new MecanumDrive(m_drive_fl, m_drive_bl, m_drive_fr, m_drive_br );
 
 
   public void drive(double y, double x, double z) {
-  if (Math.abs(y) > 0.3){
-    ySpeed = (Math.abs(y)-0.3)/0.7*(Math.abs(y)/y);
-    System.out.println(ySpeed);
+  if (Math.abs(y) > 0.2){
+    ySpeed = (Math.abs(y)-0.2)/0.8*(Math.abs(y)/y);
   }else{
     ySpeed = 0;
   }
-  if (Math.abs(x) > 0.3){
-    xSpeed = (Math.abs(x)-0.3)/0.7*(Math.abs(x)/x);
+  if (Math.abs(x) > 0.2){
+    xSpeed = (Math.abs(x)-0.2)/0.8*(Math.abs(x)/x);
   }else{
     xSpeed = 0;
   }
-  if (Math.abs(z) > 0.3){
-    zSpeed = (Math.abs(z)-0.3)/0.7*(Math.abs(z)/z);
+  if (Math.abs(z) > 0.2){
+    zSpeed = (Math.abs(z)-0.2)/0.8*(Math.abs(z)/z);
+    System.out.println(zSpeed);
   }else{
     zSpeed = 0;
   }
-    m_MecanumDrive.driveCartesian(ySpeed, xSpeed, -zSpeed);
+    m_MecanumDrive.driveCartesian(ySpeed, -xSpeed, -zSpeed);
   }
 
   @Override
