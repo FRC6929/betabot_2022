@@ -45,9 +45,9 @@ public class DriveCommand extends CommandBase {
     z = -m_Joystick.getZ();
     }
     else{
-      x = -m_Gamepad.getRawAxis(0);
-      y = m_Gamepad.getRawAxis(1);
-      z = -m_Gamepad.getRawAxis(2);
+      x = -m_Gamepad.getLeftX();
+      y = m_Gamepad.getLeftY();
+      z = -m_Gamepad.getRightX();
     }
     m_drivetrain.drive(y,x,z);
   }
