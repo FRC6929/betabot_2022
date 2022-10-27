@@ -23,13 +23,13 @@ public class DriveCommand extends CommandBase {
   double y;
   double x;
   double z;
+  public double slider;
   /** Creates a new DriveCommand. */
   public DriveCommand(Joystick j, XboxController g, Drivetrain drivetrain, AHRS navx){
     m_drivetrain = drivetrain;
     m_Joystick = j;
     m_Gamepad = g;
     m_navx = navx;
-
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(drivetrain);
   }
@@ -51,20 +51,21 @@ public class DriveCommand extends CommandBase {
     y = -m_Joystick.getY();
     x = -m_Joystick.getX();
     z = -m_Joystick.getZ();
+    slider = (m_Joystick.getRawAxis(3) + 1) / 2;
     }
     else{
       x = -m_Gamepad.getRawAxis(0);
       y = m_Gamepad.getRawAxis(1);
       z = -m_Gamepad.getRawAxis(2);
     }
-    m_drivetrain.drive(y,x,z, m_navx.getYaw());
+    m_drivetrain.drive(y,x,z, m_navx.getYaw(), slider);
   }
 
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_drivetrain.drive(0.0,0.0,0.0,0.0);
+    m_drivetrain.drive(0.0,0.0,0.0,0.0,0.0);
   }
   // Returns true when the command should end.
   @Override
