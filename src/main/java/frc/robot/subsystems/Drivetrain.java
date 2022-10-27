@@ -50,7 +50,7 @@ public class Drivetrain extends SubsystemBase {
     SmartDashboard.putNumber("x", xSpeed);
     SmartDashboard.putNumber("y", ySpeed);
     SmartDashboard.putNumber("z", zSpeed);
-    m_MecanumDrive.driveCartesian(ySpeed, -xSpeed, -zSpeed);
+    m_MecanumDrive.driveCartesian(ySpeed, -xSpeed, -zSpeed, -angle);
   }
 
   @Override
