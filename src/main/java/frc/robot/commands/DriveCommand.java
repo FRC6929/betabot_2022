@@ -57,7 +57,7 @@ public class DriveCommand extends CommandBase {
       y = m_Gamepad.getRawAxis(1);
       z = -m_Gamepad.getRawAxis(2);
     }
-    m_drivetrain.drive(y,x,z, m_navx.getYaw());
+    m_drivetrain.drive(y,x,z, 0.0);
   }
 
 
