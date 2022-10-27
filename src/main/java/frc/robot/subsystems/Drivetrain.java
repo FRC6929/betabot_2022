@@ -8,6 +8,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 public class Drivetrain extends SubsystemBase {
@@ -24,7 +25,7 @@ public class Drivetrain extends SubsystemBase {
   /** Creates a new drivetrain. */
   public Drivetrain() {
     m_drive_fr.setInverted(true);
-
+    m_drive_br.setInverted(true);
   }
 
   private final MecanumDrive m_MecanumDrive = new MecanumDrive(m_drive_fl, m_drive_bl, m_drive_fr, m_drive_br );
@@ -47,7 +48,10 @@ public class Drivetrain extends SubsystemBase {
   }else{
     zSpeed = 0;
   }
-    m_MecanumDrive.driveCartesian(ySpeed*slider, -xSpeed*slider, -zSpeed*slider, 100.0);
+    m_MecanumDrive.driveCartesian(ySpeed*slider, -xSpeed*slider, -zSpeed*slider, -angle);
+    SmartDashboard.putNumber("x", xSpeed);
+    SmartDashboard.putNumber("y", ySpeed);
+    SmartDashboard.putNumber("z", zSpeed);
   }
 
   @Override
