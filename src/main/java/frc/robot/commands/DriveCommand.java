@@ -51,12 +51,14 @@ public class DriveCommand extends CommandBase {
     y = -m_Joystick.getY();
     x = -m_Joystick.getX();
     z = -m_Joystick.getZ();
-    slider = (m_Joystick.getRawAxis(3) + 1) / 2;
+    slider = (m_Joystick.getRawAxis(3) - 1)/ -2;
     }
     else{
       x = -m_Gamepad.getLeftX();
-      y = m_Gamepad.getLeftY();
-      z = -m_Gamepad.getRightX();
+      y = -m_Gamepad.getLeftY();
+      z = -2*m_Gamepad.getRightX();
+      
+       
     }
     m_drivetrain.drive(y,x,z, m_navx.getYaw(), slider);
   }
