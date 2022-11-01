@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  * project.
  */
 public class Robot extends TimedRobot {
-  byte temp = 1;
+  boolean temp = true;
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
@@ -40,9 +40,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    if(temp == 1){
+    if(temp == true){
       SmartDashboard.putBoolean("Joystick", true);
-      temp = 0;
+      temp = false;
     }
     RobotState.joystick = SmartDashboard.getBoolean("Joystick", true);
     // Runs the Scheduler.  This is responsible for polling buttons, adding newly-scheduled
