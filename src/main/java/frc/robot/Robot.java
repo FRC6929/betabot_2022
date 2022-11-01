@@ -21,7 +21,7 @@ import frc.robot.subsystems.Limelight;
  * project.
  */
 public class Robot extends TimedRobot {
-  byte temp = 1;
+  boolean temp = true;
   NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
 NetworkTableEntry tx = table.getEntry("tx");
 NetworkTableEntry ty = table.getEntry("ty");
@@ -54,9 +54,9 @@ double area = ta.getDouble(0.0);
    */
   @Override
   public void robotPeriodic() {
-    if(temp == 1){
+    if(temp == true){
       SmartDashboard.putBoolean("Joystick", true);
-      temp = 0;
+      temp = false;
     }
     RobotState.joystick = SmartDashboard.getBoolean("Joystick", true);
     SmartDashboard.putNumber("xCamera",x);
