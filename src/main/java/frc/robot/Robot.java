@@ -22,13 +22,6 @@ import frc.robot.subsystems.Limelight;
  */
 public class Robot extends TimedRobot {
   boolean temp = true;
-  NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
-NetworkTableEntry tx = table.getEntry("tx");
-NetworkTableEntry ty = table.getEntry("ty");
-NetworkTableEntry ta = table.getEntry("ta");
-double x = tx.getDouble(0.0);
-double y = ty.getDouble(0.0);
-double area = ta.getDouble(0.0);
   
   private Command m_autonomousCommand;
 
@@ -59,9 +52,6 @@ double area = ta.getDouble(0.0);
       temp = false;
     }
     RobotState.joystick = SmartDashboard.getBoolean("Joystick", true);
-    SmartDashboard.putNumber("xCamera",x);
-    SmartDashboard.putNumber("yCamera",y);
-    SmartDashboard.putNumber("aCamera",area);
     // Runs the Scheduler.  This is responsible for polling buttons, adding newly-scheduled
     // commands, running already-scheduled commands, removing finished or interrupted commands,
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
@@ -105,9 +95,7 @@ double area = ta.getDouble(0.0);
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    x = tx.getDouble(0.0);
-    y = ty.getDouble(0.0);
-    area = ta.getDouble(0.0);
+
   }
 
   @Override

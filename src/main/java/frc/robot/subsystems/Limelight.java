@@ -4,6 +4,8 @@
 
 package frc.robot.subsystems;
 
+import java.lang.reflect.Array;
+
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -20,9 +22,12 @@ public class Limelight extends SubsystemBase {
   public double area = ta.getDouble(0.0);
   /** Creates a new Limelight. */
   public Limelight() {}
-
   @Override
   public void periodic() {
+    SmartDashboard.putNumber("x2", x);
+    x = tx.getDouble(0.0);
+    y = ty.getDouble(0.0);
+    area = ta.getDouble(0.0);
     // This method will be called once per scheduler run
   }
 }
