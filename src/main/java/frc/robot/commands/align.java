@@ -4,8 +4,7 @@
 
 package frc.robot.commands;
 
-import java.lang.reflect.Array;
-
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drivetrain;
@@ -15,11 +14,13 @@ public class align extends CommandBase {
   Drivetrain mDrivetrain;
   int bouton;
   Limelight limel;
+  Joystick joojo;
   /** Creates a new align. */
-  public align(Drivetrain drivetrain, Limelight lime, int boton) {
+  public align(Drivetrain drivetrain, Limelight lime, int boton, Joystick joystick) {
     mDrivetrain = drivetrain;
     limel = lime;
     bouton = boton;//fait par nao
+    joojo = joystick;
     addRequirements(mDrivetrain, limel);
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -35,7 +36,7 @@ public class align extends CommandBase {
     SmartDashboard.putNumber("yi", limel.y);
     SmartDashboard.putNumber("areai", limel.area);
     SmartDashboard.putNumber("speed", (limel.x/25*0.4) + (Math.abs(limel.x)/limel.x * 0.2));
-    if (limel.y!=0 ) mDrivetrain.drive(0,(limel.x/25*0.4) + (Math.abs(limel.x)/limel.x * 0.2) , 0, 0, 1);
+    if (limel.y!=0 ) mDrivetrain.drive(joojo.getY(),(limel.x/25*0.4) + (Math.abs(limel.x)/limel.x * 0.2) , joojo.getZ(), 0, 1);
     else mDrivetrain.drive(0, 0, 0, 0, 0);
   }
 

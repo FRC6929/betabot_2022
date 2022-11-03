@@ -47,7 +47,7 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
      JoystickButton jo_3 = new JoystickButton(m_Joystick, 3);
-     jo_3.whenHeld(new align(m_drivetrain, m_lime, 3));
+     jo_3.whenHeld(new align(m_drivetrain, m_lime, 3, m_Joystick));
       
     m_drivetrain.setDefaultCommand(new DriveCommand(m_Joystick, m_Controller, m_drivetrain, ahrs));
   }
