@@ -35,8 +35,8 @@ public class align extends CommandBase {
     SmartDashboard.putNumber("xi", limel.x);
     SmartDashboard.putNumber("yi", limel.y);
     SmartDashboard.putNumber("areai", limel.area);
-    SmartDashboard.putNumber("speed", (limel.x/25*0.4) + (Math.abs(limel.x)/limel.x * 0.2));
-    if (limel.y!=0 ) mDrivetrain.drive(joojo.getY(),(limel.x/25*0.4) + (Math.abs(limel.x)/limel.x * 0.2) , joojo.getZ(), 0, 1);
+    SmartDashboard.putNumber("speed", -((limel.x/25*0.4) + (Math.abs(limel.x)/limel.x * 0.2)));
+    if (limel.y!=0 ) mDrivetrain.drive(joojo.getY()*-.5,-((limel.x/25*0.4) + (Math.abs(limel.x)/limel.x * 0.2)), joojo.getZ()*-0.5, 0, 1);
     else mDrivetrain.drive(0, 0, 0, 0, 0);
   }
 
