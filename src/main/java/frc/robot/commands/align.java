@@ -49,7 +49,7 @@ public class align extends CommandBase {
       y = -controler.getLeftY()*.5;
       z = -controler.getRightX();
     }
-    if (limel.y!=0 ) mDrivetrain.drive(y,-((limel.x/25*0.4) + (Math.abs(limel.x)/limel.x * 0.2)), z, 0, 1);
+    if (limel.y!=0 ) mDrivetrain.drive(y,-((limel.x/25*0.4) + (Math.abs(limel.x)/limel.x * 0.21)), z, 0, 1);
     else mDrivetrain.drive(0, 0, 0, 0, 0);
   }
 
