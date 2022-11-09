@@ -5,8 +5,10 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.RobotState;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Limelight;
 
@@ -15,12 +17,16 @@ public class align extends CommandBase {
   int bouton;
   Limelight limel;
   Joystick joojo;
+  XboxController controler;
+  double y;
+  double z;
   /** Creates a new align. */
-  public align(Drivetrain drivetrain, Limelight lime, int boton, Joystick joystick) {
+  public align(Drivetrain drivetrain, Limelight lime, int boton, Joystick joystick, XboxController controller) {
     mDrivetrain = drivetrain;
     limel = lime;
     bouton = boton;//fait par nao
     joojo = joystick;
+    controler = controller;
     addRequirements(mDrivetrain, limel);
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -36,7 +42,14 @@ public class align extends CommandBase {
     SmartDashboard.putNumber("yi", limel.y);
     SmartDashboard.putNumber("areai", limel.area);
     SmartDashboard.putNumber("speed", -((limel.x/25*0.4) + (Math.abs(limel.x)/limel.x * 0.2)));
-    if (limel.y!=0 ) mDrivetrain.drive(joojo.getY()*-.5,-((limel.x/25*0.4) + (Math.abs(limel.x)/limel.x * 0.2)), joojo.getZ()*-0.5, 0, 1);
+    if (RobotState.joystick==true){
+      y = joojo.getY()*-.5;
+      z = joojo.getZ()*-0.5;
+    }else{
+      y = -controler.getLeftY()*.5;
+      z = -controler.getRightX();
+    }
+    if (limel.y!=0 ) mDrivetrain.drive(y,-((limel.x/25*0.4) + (Math.abs(limel.x)/limel.x * 0.2)), z, 0, 1);
     else mDrivetrain.drive(0, 0, 0, 0, 0);
   }
 
