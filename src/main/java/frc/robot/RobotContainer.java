@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.align;
+import frc.robot.commands.kill;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Limelight;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -48,9 +49,11 @@ public class RobotContainer {
   private void configureButtonBindings() {
      JoystickButton jo_3 = new JoystickButton(m_Joystick, 3);
      JoystickButton con_lb = new JoystickButton(m_Controller, 5);
+     JoystickButton kill_button = new JoystickButton(m_Joystick, 8);
 
      jo_3.whenHeld(new align(m_drivetrain, m_lime, 3, m_Joystick, m_Controller));
      con_lb.whenHeld(new align(m_drivetrain, m_lime, 5, m_Joystick, m_Controller));
+     kill_button.whenHeld(new kill(m_drivetrain, m_lime));
     
     m_drivetrain.setDefaultCommand(new DriveCommand(m_Joystick, m_Controller, m_drivetrain, ahrs));
   }

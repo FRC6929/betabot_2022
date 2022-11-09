@@ -44,12 +44,14 @@ public class align extends CommandBase {
     SmartDashboard.putNumber("speed", -((limel.x/25*0.4) + (Math.abs(limel.x)/limel.x * 0.2)));
     if (RobotState.joystick==true){
       y = joojo.getY()*-.5;
-      z = joojo.getZ()*-0.5;
+      z = joojo.getZ()*-0.7;
     }else{
       y = -controler.getLeftY()*.5;
-      z = -controler.getRightX();
+      z = -controler.getRawAxis(2);
     }
-    if (limel.y!=0 ) mDrivetrain.drive(y,-((limel.x/25*0.4) + (Math.abs(limel.x)/limel.x * 0.21)), z, 0, 1);
+    if (limel.y!=0 ){
+      mDrivetrain.drive(y,-((limel.x/25*0.4) + (Math.abs(limel.x)/limel.x * 0.21)), z, 0, 1);
+    }
     else mDrivetrain.drive(0, 0, 0, 0, 0);
   }
 

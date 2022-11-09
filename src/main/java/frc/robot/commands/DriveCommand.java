@@ -56,7 +56,7 @@ public class DriveCommand extends CommandBase {
     else{
       x = -m_Gamepad.getLeftX();
       y = -m_Gamepad.getLeftY();
-      z = -2*m_Gamepad.getRightX();
+      z = -m_Gamepad.getRawAxis(2);
       
        
     }
