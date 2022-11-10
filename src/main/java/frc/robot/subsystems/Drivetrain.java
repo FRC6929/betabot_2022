@@ -4,12 +4,15 @@
 
 package frc.robot.subsystems;
 
+import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import edu.wpi.first.wpilibj.SPI;
 public class Drivetrain extends SubsystemBase {
   private final CANSparkMax m_drive_fl = new CANSparkMax(Constants.ConsDrivetrain.Motor_Fl, MotorType.kBrushless);
   private final CANSparkMax m_drive_fr = new CANSparkMax(Constants.ConsDrivetrain.Motor_Fr, MotorType.kBrushless);
@@ -28,24 +31,22 @@ public class Drivetrain extends SubsystemBase {
   }
 
   private final MecanumDrive m_MecanumDrive = new MecanumDrive(m_drive_fl, m_drive_bl, m_drive_fr, m_drive_br );
-
   public void drive(double y, double x, double z, double angle, double slider) {
-  if (Math.abs(y) > 0.2){
-    ySpeed = (Math.abs(y)-0.2)/0.8*(Math.abs(y)/y);
-  }else{
-    ySpeed = 0;
-  }
-  if (Math.abs(x) > 0.2){
-    xSpeed = (Math.abs(x)-0.2)/0.8*(Math.abs(x)/x);
-  }else{
-    xSpeed = 0;
-  }
-  if (Math.abs(z) > 0.4){
-    zSpeed = .3*(Math.abs(z)-0.4)/0.6*(Math.abs(z)/z);
-    System.out.println(zSpeed);
-  }else{
-    zSpeed = 0;
-  }
+    if (Math.abs(y) > 0.2){
+      ySpeed = (Math.abs(y)-0.2)/0.8*(Math.abs(y)/y);
+    }else{
+      ySpeed = 0;
+    }
+    if (Math.abs(x) > 0.2){
+      xSpeed = (Math.abs(x)-0.2)/0.8*(Math.abs(x)/x);
+    }else{
+      xSpeed = 0;
+    }
+    if (Math.abs(z) > 0.4){
+      zSpeed = .3*(Math.abs(z)-0.4)/0.6*(Math.abs(z)/z);
+    }else{
+      zSpeed = 0;
+    }
     m_MecanumDrive.driveCartesian(ySpeed*slider, -xSpeed*slider, -zSpeed*slider);
     SmartDashboard.putNumber("x", xSpeed);
     SmartDashboard.putNumber("y", ySpeed);
