@@ -14,6 +14,7 @@ import frc.robot.commands.DriveCommand;
 import frc.robot.commands.align;
 import frc.robot.commands.kill;
 import frc.robot.subsystems.AirDropper;
+import frc.robot.subsystems.Camera;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Limelight;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -29,6 +30,7 @@ import edu.wpi.first.wpilibj.SPI;
 public class RobotContainer {
   public final Drivetrain m_drivetrain = new Drivetrain();
   public final AirDropper m_airdropper = new AirDropper();
+
   // The robot's subsystems and commands are defined here...
   private final Joystick m_Joystick = new Joystick(0);
   private final XboxController m_Controller = new XboxController(1);
@@ -55,6 +57,8 @@ public class RobotContainer {
      JoystickButton jo_3 = new JoystickButton(m_Joystick, 3);
      JoystickButton con_lb = new JoystickButton(m_Controller, 5);
      JoystickButton kill_button = new JoystickButton(m_Joystick, 8);
+     JoystickButton camdown = new JoystickButton(m_Joystick, 4);
+     JoystickButton camup = new JoystickButton(m_Joystick, 6);
      //ATTENTION VÉRIFER SI C'EST LES BONS BOUTONS ATTENTION VÉRIFER SI C'EST LES BONS BOUTONS ATTENTION VÉRIFER SI C'EST LES BONS BOUTONS ATTENTION VÉRIFER SI C'EST LES BONS BOUTONS
      JoystickButton ldrop = new JoystickButton(m_Copilote, 1);
      JoystickButton rdrop = new JoystickButton(m_Copilote, 2);
