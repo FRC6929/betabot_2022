@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.AirCommander;
 import frc.robot.commands.DriveCommand;
+import frc.robot.commands.SetCam;
 import frc.robot.commands.align;
 import frc.robot.commands.kill;
 import frc.robot.subsystems.AirDropper;
@@ -30,6 +31,7 @@ import edu.wpi.first.wpilibj.SPI;
 public class RobotContainer {
   public final Drivetrain m_drivetrain = new Drivetrain();
   public final AirDropper m_airdropper = new AirDropper();
+  public final Camera m_camera = new Camera();
 
   // The robot's subsystems and commands are defined here...
   private final Joystick m_Joystick = new Joystick(0);
@@ -72,6 +74,8 @@ public class RobotContainer {
      rdrop.whenHeld(new AirCommander(m_airdropper, 1,0));
      f_scraper.whenHeld(new AirCommander(m_airdropper, 0,1));
      b_scraper.whenHeld(new AirCommander(m_airdropper, 0,-1));
+     camdown.whenActive(new SetCam(m_camera, false));
+     camup.whenActive(new SetCam(m_camera, true));
     m_drivetrain.setDefaultCommand(new DriveCommand(m_Joystick, m_Controller, m_drivetrain, ahrs));
   }
 
