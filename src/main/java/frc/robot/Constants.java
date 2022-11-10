@@ -20,5 +20,11 @@ public final class Constants {
         public static final int Motor_Br = 4;
         public static final int Motor_Fr = 2;
     }
+    public static class ConsAirDropper {
+        public static final int Motor_AL = 5;
+        public static final int Motor_AM = 6;
+        public static final int Motor_AR = 7;
+        public static final int Motor_Scrape = 8;
+    }
 
 }
