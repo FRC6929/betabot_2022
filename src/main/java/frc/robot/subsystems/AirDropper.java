@@ -18,7 +18,7 @@ public class AirDropper extends SubsystemBase {
   public AirDropper() {
      m_drop_AR.setInverted(true);
   }
-  public void dropper(int dropvalue){
+  public void Dropper(int dropvalue){
     if (dropvalue == 1){
       m_drop_AR.set(.3);
       m_drop_AM.set(.3);
@@ -26,6 +26,12 @@ public class AirDropper extends SubsystemBase {
       m_drop_AL.set(.3);
       m_drop_AM.set(-.3);
     }
+  }
+
+  public void Stop(){
+    m_drop_AL.set(0);
+    m_drop_AR.set(0);
+    m_drop_AM.set(0);
   }
 
   @Override
