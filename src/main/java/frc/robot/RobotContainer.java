@@ -51,6 +51,16 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
   }
+public double getHeading() {
+    double heading = -ahrs.getYaw();
+    if (heading  > 180 || heading < 180) {
+      heading = Math.IEEEremainder(heading, 360);
+    }
+    return heading;
+}
+public void resetNavx(){
+  ahrs.reset();
+}
 
   /**
    * Use this method to define your button->command mappings. Buttons can be created by
@@ -79,7 +89,7 @@ public class RobotContainer {
      satnousup.whenHeld(new StanousCommand(m_stanous, true));
      camdown.whenActive(new SetCam(m_camera, false));
      camup.whenActive(new SetCam(m_camera, true));
-    m_drivetrain.setDefaultCommand(new DriveCommand(m_Joystick, m_Controller, m_drivetrain, ahrs));
+    m_drivetrain.setDefaultCommand(new DriveCommand(m_Joystick, m_Controller, m_drivetrain, getHeading()));
   }
 
   /**
