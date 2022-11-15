@@ -9,15 +9,17 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.AirCommander;
+import frc.robot.commands.AirCommand;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.SetCam;
+import frc.robot.commands.StanousCommand;
 import frc.robot.commands.align;
 import frc.robot.commands.kill;
 import frc.robot.subsystems.AirDropper;
 import frc.robot.subsystems.Camera;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Limelight;
+import frc.robot.subsystems.Stanous;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.SPI;
@@ -31,6 +33,7 @@ import edu.wpi.first.wpilibj.SPI;
 public class RobotContainer {
   public final Drivetrain m_drivetrain = new Drivetrain();
   public final AirDropper m_airdropper = new AirDropper();
+  public final Stanous m_stanous = new Stanous();
   public final Camera m_camera = new Camera();
 
   // The robot's subsystems and commands are defined here...
@@ -64,16 +67,16 @@ public class RobotContainer {
      //ATTENTION VÉRIFER SI C'EST LES BONS BOUTONS ATTENTION VÉRIFER SI C'EST LES BONS BOUTONS ATTENTION VÉRIFER SI C'EST LES BONS BOUTONS ATTENTION VÉRIFER SI C'EST LES BONS BOUTONS
      JoystickButton ldrop = new JoystickButton(m_Copilote, 1);
      JoystickButton rdrop = new JoystickButton(m_Copilote, 2);
-     JoystickButton f_scraper = new JoystickButton(m_Copilote, 3);
-     JoystickButton b_scraper = new JoystickButton(m_Copilote, 4);
+     JoystickButton satnousdown = new JoystickButton( m_Joystick, 11);
+     JoystickButton satnousup = new JoystickButton( m_Joystick, 12);
      //ATTENTION VÉRIFER SI C'EST LES BONS BOUTONS ATTENTION VÉRIFER SI C'EST LES BONS BOUTONS ATTENTION VÉRIFER SI C'EST LES BONS BOUTONS ATTENTION VÉRIFER SI C'EST LES BONS BOUTONS
      jo_3.whenHeld(new align(m_drivetrain, m_lime, 3, m_Joystick, m_Controller));
      con_lb.whenHeld(new align(m_drivetrain, m_lime, 5, m_Joystick, m_Controller));
      kill_button.whenHeld(new kill(m_drivetrain, m_lime));
-     ldrop.whenHeld(new AirCommander(m_airdropper, -1,0));
-     rdrop.whenHeld(new AirCommander(m_airdropper, 1,0));
-     f_scraper.whenHeld(new AirCommander(m_airdropper, 0,1));
-     b_scraper.whenHeld(new AirCommander(m_airdropper, 0,-1));
+     ldrop.whenHeld(new AirCommand(m_airdropper, -1));
+     rdrop.whenHeld(new AirCommand(m_airdropper, 1));
+     satnousdown.whenHeld(new StanousCommand(m_stanous, false));
+     satnousup.whenHeld(new StanousCommand(m_stanous, true));
      camdown.whenActive(new SetCam(m_camera, false));
      camup.whenActive(new SetCam(m_camera, true));
     m_drivetrain.setDefaultCommand(new DriveCommand(m_Joystick, m_Controller, m_drivetrain, ahrs));

@@ -5,18 +5,16 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.AirDropper;
+import frc.robot.subsystems.Stanous;
 
-public class AirCommander extends CommandBase {
-  AirDropper mAirDropper;
-  int drop_value;
-  int scraper;
-  /** Creates a new AirCommander. */
-  public AirCommander(AirDropper airDropper,int drop,int scrap) {
-    mAirDropper = airDropper;
-    drop_value = drop;
-    scraper = scrap;
-    addRequirements(mAirDropper);
+public class StanousCommand extends CommandBase {
+  Stanous mStanous;
+  Boolean a_nous_mtn;
+  /** Creates a new StanousCommand. */
+  public StanousCommand(Stanous stanous,Boolean a_nous) {
+    mStanous = stanous;
+    a_nous_mtn = a_nous;
+    addRequirements(mStanous);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -27,12 +25,14 @@ public class AirCommander extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    mAirDropper.dropper(drop_value,scraper);
+    mStanous.Stanous_mtn(a_nous_mtn);
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    mStanous.Stop();
+  }
 
   // Returns true when the command should end.
   @Override

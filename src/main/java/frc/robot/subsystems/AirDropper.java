@@ -14,28 +14,19 @@ public class AirDropper extends SubsystemBase {
   private final CANSparkMax m_drop_AL = new CANSparkMax(ConsAirDropper.Motor_AL, MotorType.kBrushless);
   private final CANSparkMax m_drop_AM = new CANSparkMax(ConsAirDropper.Motor_AM, MotorType.kBrushless);
   private final CANSparkMax m_drop_AR = new CANSparkMax(ConsAirDropper.Motor_AR, MotorType.kBrushless);
-  private final CANSparkMax m_drop_Scraper = new CANSparkMax(ConsAirDropper.Motor_Scrape, MotorType.kBrushless);
   /** Creates a new AirDropper. */
   public AirDropper() {
      m_drop_AR.setInverted(true);
   }
-  public void dropper(int dropvalue, int scraper){
+  public void dropper(int dropvalue){
     if (dropvalue == 1){
-      m_drop_AR.set(.5);
-      m_drop_AM.set(.5);
-    }if (dropvalue == -1){
-      m_drop_AL.set(.5);
-      m_drop_AM.set(-.5);
-    }
-    if (scraper == 1) {
-      m_drop_Scraper.set(.3);
-    }if (scraper == -1) {
-      m_drop_Scraper.set(-.3);
+      m_drop_AR.set(.3);
+      m_drop_AM.set(.3);
+    }else if (dropvalue == -1){
+      m_drop_AL.set(.3);
+      m_drop_AM.set(-.3);
     }
   }
-
-
-
 
   @Override
   public void periodic() {

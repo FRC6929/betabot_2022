@@ -24,7 +24,9 @@ public final class Constants {
         public static final int Motor_AL = 5;
         public static final int Motor_AM = 6;
         public static final int Motor_AR = 7;
-        public static final int Motor_Scrape = 8;
     }
 
+    public static class ConsStanous {
+        public static final int Motor_Scrape = 8;
+    }
 }

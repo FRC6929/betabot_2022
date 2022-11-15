@@ -16,13 +16,12 @@ public class Camera extends SubsystemBase {
   public void look_down(){
     SmartDashboard.putNumber("servo", m_servo.getPosition());
     m_servo.set(.5);
-    m_servo.setPosition(0.4);
-    
+    m_servo.setPosition(0);
   }
 
   public void look_forward(){
     m_servo.set(.5);
-    m_servo.setPosition(0);
+    m_servo.setPosition(0.35);
   }
   @Override
   public void periodic() {
