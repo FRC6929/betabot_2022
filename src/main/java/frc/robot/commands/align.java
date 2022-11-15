@@ -20,6 +20,7 @@ public class align extends CommandBase {
   XboxController controler;
   double y;
   double z;
+  boolean go = false;
   /** Creates a new align. */
   public align(Drivetrain drivetrain, Limelight lime, int boton, Joystick joystick, XboxController controller) {
     mDrivetrain = drivetrain;
@@ -48,13 +49,24 @@ public class align extends CommandBase {
     }else{
       y = -controler.getLeftY()*.5;
       z = -controler.getRawAxis(2);
+    } 
+    if(joojo.getRawButtonPressed(5))
+    {
+      go = true;
     }
-    if (limel.y!=0 ){
-      mDrivetrain.drive(y,-((limel.x/25*0.4) + (Math.abs(limel.x)/limel.x * 0.21)), z, 0, 1);
+    else if(joojo.getRawButtonReleased(5))
+    {
+      go = false;
     }
-    else mDrivetrain.drive(0, 0, 0, 0, 0);
+    if(go == true){
+    mDrivetrain.drive(.3, 0, 0, 0, 1);
+    }else 
+    {
+      if (limel.y!=0 ){
+        mDrivetrain.drive(y,-((limel.x/25*0.4) + (Math.abs(limel.x)/limel.x * 0.21)), z, 0, 1);
+      }
+    }
   }
-
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {}

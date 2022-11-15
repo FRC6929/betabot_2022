@@ -14,7 +14,6 @@ import frc.robot.commands.DriveCommand;
 import frc.robot.commands.SetCam;
 import frc.robot.commands.StanousCommand;
 import frc.robot.commands.align;
-import frc.robot.commands.kill;
 import frc.robot.subsystems.AirDropper;
 import frc.robot.subsystems.Camera;
 import frc.robot.subsystems.Drivetrain;
@@ -69,26 +68,24 @@ public void resetNavx(){
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-     JoystickButton jo_3 = new JoystickButton(m_Joystick, 3);
-     JoystickButton con_lb = new JoystickButton(m_Controller, 5);
-     JoystickButton kill_button = new JoystickButton(m_Joystick, 8);
-     JoystickButton camdown = new JoystickButton(m_Joystick, 4);
-     JoystickButton camup = new JoystickButton(m_Joystick, 6);
-     //ATTENTION VÉRIFER SI C'EST LES BONS BOUTONS ATTENTION VÉRIFER SI C'EST LES BONS BOUTONS ATTENTION VÉRIFER SI C'EST LES BONS BOUTONS ATTENTION VÉRIFER SI C'EST LES BONS BOUTONS
-     JoystickButton ldrop = new JoystickButton(m_Copilote, 1);
-     JoystickButton rdrop = new JoystickButton(m_Copilote, 2);
-     JoystickButton satnousdown = new JoystickButton( m_Joystick, 11);
-     JoystickButton satnousup = new JoystickButton( m_Joystick, 12);
-     //ATTENTION VÉRIFER SI C'EST LES BONS BOUTONS ATTENTION VÉRIFER SI C'EST LES BONS BOUTONS ATTENTION VÉRIFER SI C'EST LES BONS BOUTONS ATTENTION VÉRIFER SI C'EST LES BONS BOUTONS
-     jo_3.whenHeld(new align(m_drivetrain, m_lime, 3, m_Joystick, m_Controller));
-     con_lb.whenHeld(new align(m_drivetrain, m_lime, 5, m_Joystick, m_Controller));
-     kill_button.whenHeld(new kill(m_drivetrain, m_lime));
-     ldrop.whenHeld(new AirCommand(m_airdropper, -1));
-     rdrop.whenHeld(new AirCommand(m_airdropper, 1));
-     satnousdown.whenHeld(new StanousCommand(m_stanous, false));
-     satnousup.whenHeld(new StanousCommand(m_stanous, true));
-     camdown.whenActive(new SetCam(m_camera, false));
-     camup.whenActive(new SetCam(m_camera, true));
+    JoystickButton align_jo = new JoystickButton(m_Joystick, 3);
+    JoystickButton align_co = new JoystickButton(m_Controller, 5);
+    JoystickButton camdown = new JoystickButton(m_Joystick, 4);//copilote
+    JoystickButton camup = new JoystickButton(m_Joystick, 6);//copilote
+    //ATTENTION VÉRIFER SI C'EST LES BONS BOUTONS ATTENTION VÉRIFER SI C'EST LES BONS BOUTONS ATTENTION VÉRIFER SI C'EST LES BONS BOUTONS ATTENTION VÉRIFER SI C'EST LES BONS BOUTONS
+    JoystickButton ldrop = new JoystickButton(m_Copilote, 1);
+    JoystickButton rdrop = new JoystickButton(m_Copilote, 2);
+    JoystickButton satnousdown_jo = new JoystickButton( m_Joystick, 11);//copilote
+    JoystickButton satnousup_jo = new JoystickButton( m_Joystick, 12);//copilote
+    //ATTENTION VÉRIFER SI C'EST LES BONS BOUTONS ATTENTION VÉRIFER SI C'EST LES BONS BOUTONS ATTENTION VÉRIFER SI C'EST LES BONS BOUTONS ATTENTION VÉRIFER SI C'EST LES BONS BOUTONS
+    align_jo.whenHeld(new align(m_drivetrain, m_lime, 3, m_Joystick, m_Controller));
+    align_co.whenHeld(new align(m_drivetrain, m_lime, 5, m_Joystick, m_Controller));
+    ldrop.whenHeld(new AirCommand(m_airdropper, -1));
+    rdrop.whenHeld(new AirCommand(m_airdropper, 1));
+    satnousdown_jo.whenHeld(new StanousCommand(m_stanous, false));
+    satnousup_jo.whenHeld(new StanousCommand(m_stanous, true));
+    camdown.whenActive(new SetCam(m_camera, false));
+    camup.whenActive(new SetCam(m_camera, true));
     m_drivetrain.setDefaultCommand(new DriveCommand(m_Joystick, m_Controller, m_drivetrain, getHeading()));
   }
 
