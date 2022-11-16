@@ -58,12 +58,33 @@ public class Drivetrain extends SubsystemBase {
       zSpeed = 0;
     }
     m_MecanumDrive.driveCartesian(ySpeed*slider, -xSpeed*slider, -zSpeed*slider, angle);
-    SmartDashboard.putNumber("x", xSpeed);
-    SmartDashboard.putNumber("y", ySpeed);
-    SmartDashboard.putNumber("z", zSpeed);
+    SmartDashboard.putNumber("x", xSpeed*slider);
+    SmartDashboard.putNumber("y", ySpeed*slider);
+    SmartDashboard.putNumber("z", zSpeed*slider);
     SmartDashboard.putNumber("anglee", angle);
   }
-
+  public void drive2(double y, double x, double z, double angle) {
+    if (Math.abs(y) > 0.2){
+      ySpeed = (Math.abs(y)-0.2)/0.8*(Math.abs(y)/y);
+    }else{
+      ySpeed = 0;
+    }
+    if (Math.abs(x) > 0.2){
+      xSpeed = (Math.abs(x)-0.2)/0.8*(Math.abs(x)/x);
+    }else{
+      xSpeed = 0;
+    }
+    if (Math.abs(z) > 0.4){
+      zSpeed = .3*(Math.abs(z)-0.4)/0.6*(Math.abs(z)/z);
+    }else{
+      zSpeed = 0;
+    }
+    m_MecanumDrive.driveCartesian(ySpeed, -xSpeed, -zSpeed, angle);
+    SmartDashboard.putNumber("x2", xSpeed);
+    SmartDashboard.putNumber("y2", ySpeed);
+    SmartDashboard.putNumber("z2", zSpeed);
+    SmartDashboard.putNumber("anglee2", angle);
+  }
   @Override
   public void periodic() {
     //SmartDashboard.putNumber("drivetrain speed", get_speed());

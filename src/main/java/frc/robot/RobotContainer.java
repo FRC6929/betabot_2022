@@ -75,7 +75,7 @@ public class RobotContainer {
     satnousup_jo.whenHeld(new StanousCommand(m_stanous, true));
     camdown.whenActive(new SetCam(m_camera, false));
     camup.whenActive(new SetCam(m_camera, true));
-    m_drivetrain.setDefaultCommand(new DriveCommand(m_Joystick, m_Controller, m_drivetrain, getHeading()));
+    m_drivetrain.setDefaultCommand(new DriveCommand(m_Joystick, m_Controller, m_drivetrain));
   }
   public double getHeading(){
   return m_drivetrain.getHeading();
