@@ -22,10 +22,10 @@ public class DriveCommand extends CommandBase {
   double y;
   double x;
   double z;
-  double corrected_angle; 
-  double real_angle;
-  double zero_angle;
-
+  double correct_modif; 
+  double current_angle;
+  double init_angle;
+  boolean temp;
   public double slider;
   /** Creates a new DriveCommand. */
   public DriveCommand(Joystick j, XboxController g, Drivetrain drivetrain){
@@ -58,7 +58,17 @@ public class DriveCommand extends CommandBase {
     if(RobotState.joystick==true){
       y = -m_Joystick.getY();
       x = -m_Joystick.getX();
-      z = -m_Joystick.getZ();
+      if(Math.abs(z) < 0.4 & (Math.abs(x) > .2 | Math.abs(y) > .2)){
+        if(temp == false){
+          init_angle = m_drivetrain.getHeading();
+          temp = true;
+        }
+        correct_modif = (init_angle - current_angle);
+       if(correct_modif/300 < 0) z= correct_modif/300 -0.4;
+       if(correct_modif/300 > 0) z= correct_modif/300 +0.4;
+       if(correct_modif == 0) z = 0;
+      }
+      else  z = -m_Joystick.getZ(); temp = false;
       slider = (m_Joystick.getRawAxis(3) - 1)/ -2;
     }
     else{
@@ -66,19 +76,21 @@ public class DriveCommand extends CommandBase {
       y = -m_Gamepad.getLeftY();
       z = -m_Gamepad.getRawAxis(2);
     }
-    if(Math.abs(z) > 0.4 | (Math.abs(x) < .2 & Math.abs(y) < .2)) {
-      zero_angle = m_drivetrain.getHeading();
-    }
-    real_angle = m_drivetrain.getHeading() - zero_angle;
-    if(Math.abs(z) < 0.4 & (Math.abs(x) > .2 | Math.abs(y) > .2)) corrected_angle = (Math.abs(real_angle)/real_angle * 0.4 + real_angle/30);
-    else corrected_angle = z;
-    
+    current_angle = m_drivetrain.getHeading();
+   // if(Math.abs(z) > 0.4 | (Math.abs(x) < .2 & Math.abs(y) < .2)) {
+     // current_angle = m_drivetrain.getHeading();
+    //}
+   // current_angle = m_drivetrain.getHeading() - init_angle;
+    //if(Math.abs(z) < 0.4 & (Math.abs(x) > .2 | Math.abs(y) > .2)) corrected_angle = (Math.abs(current_angle)/current_angle * 0.4 + current_angle/30);
+    //else corrected_angle = z;
+    SmartDashboard.putNumber("init_angel", init_angle);
+    SmartDashboard.putNumber("correct_modif", correct_modif/300);
+    SmartDashboard.putNumber("current_angle", current_angle);
     SmartDashboard.putNumber("xcommand", x);
     SmartDashboard.putNumber("ycommand", y);
     SmartDashboard.putNumber("zcommand", z);
-    SmartDashboard.putNumber("corrected_speed_z", corrected_angle);
    // m_drivetrain.drive(y,x,z, m_drivetrain.getHeading(), slider);
-   m_drivetrain.drive2(y,x,z, m_drivetrain.getHeading());
+   m_drivetrain.drive(y,x,z, m_drivetrain.getHeading(), slider);
   }
 
 
