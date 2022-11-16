@@ -21,15 +21,25 @@ public class Drivetrain extends SubsystemBase {
   private double ySpeed;
   private double xSpeed;
   private double zSpeed;
-  
+  private final AHRS ahrs = new AHRS(SPI.Port.kMXP);
 
 
   /** Creates a new drivetrain. */
   public Drivetrain() {
+    resetNavx();
     m_drive_fr.setInverted(true);
     m_drive_br.setInverted(true);
   }
-
+  public double getHeading() {
+    double heading = -ahrs.getYaw();
+    if (heading  > 180 || heading < 180) {
+      heading = Math.IEEEremainder(heading, 360);
+    }
+    return heading;
+  }
+  public void resetNavx(){
+  ahrs.reset();
+  }
   private final MecanumDrive m_MecanumDrive = new MecanumDrive(m_drive_fl, m_drive_bl, m_drive_fr, m_drive_br );
   public void drive(double y, double x, double z, double angle, double slider) {
     if (Math.abs(y) > 0.2){

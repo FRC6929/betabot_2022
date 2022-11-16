@@ -39,27 +39,16 @@ public class RobotContainer {
   private final Joystick m_Joystick = new Joystick(0);
   private final XboxController m_Controller = new XboxController(1);
   private final Joystick m_Copilote = new Joystick(2);
-  private final AHRS ahrs = new AHRS(SPI.Port.kMXP);
   
   public final Limelight m_lime = new Limelight();
 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    ahrs.reset();
     // Configure the button bindings
     configureButtonBindings();
   }
-public double getHeading() {
-    double heading = -ahrs.getYaw();
-    if (heading  > 180 || heading < 180) {
-      heading = Math.IEEEremainder(heading, 360);
-    }
-    return heading;
-}
-public void resetNavx(){
-  ahrs.reset();
-}
+
 
   /**
    * Use this method to define your button->command mappings. Buttons can be created by
@@ -88,7 +77,9 @@ public void resetNavx(){
     camup.whenActive(new SetCam(m_camera, true));
     m_drivetrain.setDefaultCommand(new DriveCommand(m_Joystick, m_Controller, m_drivetrain, getHeading()));
   }
-
+  public double getHeading(){
+  return m_drivetrain.getHeading();
+  }
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
