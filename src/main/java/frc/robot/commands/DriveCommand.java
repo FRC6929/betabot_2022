@@ -25,7 +25,7 @@ public class DriveCommand extends CommandBase {
   double correct_modif; 
   double current_angle;
   double init_angle;
-  boolean temp;
+  double z2;
   public double slider;
   /** Creates a new DriveCommand. */
   public DriveCommand(Joystick j, XboxController g, Drivetrain drivetrain){
@@ -58,17 +58,16 @@ public class DriveCommand extends CommandBase {
     if(RobotState.joystick==true){
       y = -m_Joystick.getY();
       x = -m_Joystick.getX();
-      if(Math.abs(z) < 0.4 & (Math.abs(x) > .2 | Math.abs(y) > .2)){
-        if(temp == false){
-          init_angle = m_drivetrain.getHeading();
-          temp = true;
-        }
-        correct_modif = (init_angle - current_angle);
-       if(correct_modif/300 < 0) z= correct_modif/300 -0.4;
-       if(correct_modif/300 > 0) z= correct_modif/300 +0.4;
-       if(correct_modif == 0) z = 0;
+      z2 = -m_Joystick.getZ();
+      if(Math.abs(z2) < 0.4 & (Math.abs(x) > .2 | Math.abs(y) > .2)){
+        correct_modif = init_angle - current_angle;
+      //  z = correct_modif/300 + Math.signum(correct_modif)*0.4;
+        z = Math.signum(correct_modif)*0.6;
       }
-      else  z = -m_Joystick.getZ(); temp = false;
+      else {
+        z = -m_Joystick.getZ();
+        init_angle = m_drivetrain.getHeading();
+      }
       slider = (m_Joystick.getRawAxis(3) - 1)/ -2;
     }
     else{
@@ -84,7 +83,7 @@ public class DriveCommand extends CommandBase {
     //if(Math.abs(z) < 0.4 & (Math.abs(x) > .2 | Math.abs(y) > .2)) corrected_angle = (Math.abs(current_angle)/current_angle * 0.4 + current_angle/30);
     //else corrected_angle = z;
     SmartDashboard.putNumber("init_angel", init_angle);
-    SmartDashboard.putNumber("correct_modif", correct_modif/300);
+    SmartDashboard.putNumber("correct_modif", correct_modif);
     SmartDashboard.putNumber("current_angle", current_angle);
     SmartDashboard.putNumber("xcommand", x);
     SmartDashboard.putNumber("ycommand", y);
