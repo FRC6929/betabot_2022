@@ -62,7 +62,7 @@ public class DriveCommand extends CommandBase {
       if(Math.abs(z2) < 0.4 & (Math.abs(x) > .2 | Math.abs(y) > .2)){
         correct_modif = init_angle - current_angle;
       //  z = correct_modif/300 + Math.signum(correct_modif)*0.4;
-        z = Math.signum(correct_modif)*0.6;
+        z = Math.signum(correct_modif)*0.525;
       }
       else {
         z = -m_Joystick.getZ();

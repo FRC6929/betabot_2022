@@ -21,10 +21,10 @@ public class AirDropper extends SubsystemBase {
   public void Dropper(int dropvalue){
     if (dropvalue == 1){
       m_drop_AR.set(.3);
-      m_drop_AM.set(.3);
+      m_drop_AM.set(-.3);
     }else if (dropvalue == -1){
       m_drop_AL.set(.3);
-      m_drop_AM.set(-.3);
+      m_drop_AM.set(.3);
     }
   }
 
