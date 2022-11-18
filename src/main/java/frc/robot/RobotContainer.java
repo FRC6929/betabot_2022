@@ -64,8 +64,8 @@ public class RobotContainer {
     //ATTENTION VÉRIFER SI C'EST LES BONS BOUTONS ATTENTION VÉRIFER SI C'EST LES BONS BOUTONS ATTENTION VÉRIFER SI C'EST LES BONS BOUTONS ATTENTION VÉRIFER SI C'EST LES BONS BOUTONS
     JoystickButton ldrop = new JoystickButton(m_Copilote, 1);
     JoystickButton rdrop = new JoystickButton(m_Copilote, 2);
-    JoystickButton satnousdown_jo = new JoystickButton( m_Joystick, 11);//copilote
-    JoystickButton satnousup_jo = new JoystickButton( m_Joystick, 12);//copilote
+    JoystickButton satnousdown_jo = new JoystickButton( m_Joystick, 8);//copilote
+    JoystickButton satnousup_jo = new JoystickButton( m_Joystick, 9);//copilote
     //ATTENTION VÉRIFER SI C'EST LES BONS BOUTONS ATTENTION VÉRIFER SI C'EST LES BONS BOUTONS ATTENTION VÉRIFER SI C'EST LES BONS BOUTONS ATTENTION VÉRIFER SI C'EST LES BONS BOUTONS
     align_jo.whenHeld(new align(m_drivetrain, m_lime, 3, m_Joystick, m_Controller));
     align_co.whenHeld(new align(m_drivetrain, m_lime, 5, m_Joystick, m_Controller));
