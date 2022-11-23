@@ -14,6 +14,8 @@ import frc.robot.commands.DriveCommand;
 import frc.robot.commands.SetCam;
 import frc.robot.commands.StanousCommand;
 import frc.robot.commands.align;
+import frc.robot.commands.Autonome.Automove;
+import frc.robot.commands.Autonome.Delay;
 import frc.robot.subsystems.AirDropper;
 import frc.robot.subsystems.Camera;
 import frc.robot.subsystems.Drivetrain;
@@ -58,17 +60,17 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     JoystickButton align_jo = new JoystickButton(m_Joystick, 3);
-    JoystickButton align_co = new JoystickButton(m_Controller, 5);
+    JoystickButton align_co = new JoystickButton(m_Copilote, 7);
     JoystickButton camdown = new JoystickButton(m_Joystick, 4);//copilote
     JoystickButton camup = new JoystickButton(m_Joystick, 6);//copilote
     //ATTENTION VÉRIFER SI C'EST LES BONS BOUTONS ATTENTION VÉRIFER SI C'EST LES BONS BOUTONS ATTENTION VÉRIFER SI C'EST LES BONS BOUTONS ATTENTION VÉRIFER SI C'EST LES BONS BOUTONS
     JoystickButton ldrop = new JoystickButton(m_Copilote, 1);
     JoystickButton rdrop = new JoystickButton(m_Copilote, 2);
-    JoystickButton satnousdown_jo = new JoystickButton( m_Joystick, 8);//copilote
-    JoystickButton satnousup_jo = new JoystickButton( m_Joystick, 9);//copilote
+    JoystickButton satnousdown_jo = new JoystickButton( m_Copilote, 8);//copilote
+    JoystickButton satnousup_jo = new JoystickButton( m_Copilote, 9);//copilote
     //ATTENTION VÉRIFER SI C'EST LES BONS BOUTONS ATTENTION VÉRIFER SI C'EST LES BONS BOUTONS ATTENTION VÉRIFER SI C'EST LES BONS BOUTONS ATTENTION VÉRIFER SI C'EST LES BONS BOUTONS
     align_jo.whenHeld(new align(m_drivetrain, m_lime, 3, m_Joystick, m_Controller));
-    align_co.whenHeld(new align(m_drivetrain, m_lime, 5, m_Joystick, m_Controller));
+    align_co.whenHeld(new align(m_drivetrain, m_lime, 3, m_Joystick, m_Controller));
     ldrop.whenHeld(new AirCommand(m_airdropper, -1));
     rdrop.whenHeld(new AirCommand(m_airdropper, 1));
     satnousdown_jo.whenHeld(new StanousCommand(m_stanous, false));
@@ -86,8 +88,13 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
+    m_drivetrain.reset_encoders();
+
+    Command m_auto = new Delay(2000);
+    m_auto = m_auto.andThen(new Automove(m_drivetrain,1));
+    
+    return m_auto;
     // An ExampleCommand will run in autonomous
    // return m_autoCommand;
-   return null;
   }
 }

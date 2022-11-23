@@ -19,10 +19,10 @@ public class Stanous extends SubsystemBase {
   public void periodic() {}
   public void Stanous_mtn(Boolean a_nous){
     if (a_nous == true){
-      m_stanous.set(.2);
+      m_stanous.set(.15);
     }
     else if (a_nous == false){
-      m_stanous.set(-.2);
+      m_stanous.set(-.15);
     }
   }
   public void Stop(){

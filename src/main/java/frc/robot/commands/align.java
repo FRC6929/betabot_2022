@@ -59,11 +59,11 @@ public class align extends CommandBase {
       go = false;
     }
     if(go == true){
-    mDrivetrain.drive(.3, 0, 0, 0, 1);
+    mDrivetrain.drive(.3, 0, 0, 0, 1, false);
     }else 
     {
       if (limel.y!=0 ){
-        mDrivetrain.drive(y,-((limel.x/25*0.4) + (Math.abs(limel.x)/limel.x * 0.21)), z, 0, 1);
+        mDrivetrain.drive(y,-((limel.x/25*0.4) + (Math.abs(limel.x)/limel.x * 0.21)), z, 0, 1, false);
       }
     }
   }

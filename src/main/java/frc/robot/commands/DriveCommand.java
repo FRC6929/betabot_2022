@@ -26,6 +26,7 @@ public class DriveCommand extends CommandBase {
   double current_angle;
   double init_angle;
   double z2;
+  boolean correction;
   public double slider;
   /** Creates a new DriveCommand. */
   public DriveCommand(Joystick j, XboxController g, Drivetrain drivetrain){
@@ -42,10 +43,12 @@ public class DriveCommand extends CommandBase {
     m_drivetrain.resetNavx();
     //m_navx.reset();
   }
+  
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    correction = !m_Joystick.getRawButton(2);
     //Joystick mode
    /* SmartDashboard.putNumber(   "IMU_Yaw",              m_navx.getYaw());
     SmartDashboard.putNumber(   "IMU_Pitch",            m_navx.getPitch());
@@ -62,7 +65,8 @@ public class DriveCommand extends CommandBase {
       if(Math.abs(z2) < 0.4 & (Math.abs(x) > .2 | Math.abs(y) > .2)){
         correct_modif = init_angle - current_angle;
       //  z = correct_modif/300 + Math.signum(correct_modif)*0.4;
-        z = Math.signum(correct_modif)*0.525;
+        //z = Math.signum(correct_modif)*0.6*Math.abs(x);
+        z = -m_Joystick.getZ();
       }
       else {
         z = -m_Joystick.getZ();
@@ -89,14 +93,14 @@ public class DriveCommand extends CommandBase {
     SmartDashboard.putNumber("ycommand", y);
     SmartDashboard.putNumber("zcommand", z);
    // m_drivetrain.drive(y,x,z, m_drivetrain.getHeading(), slider);
-   m_drivetrain.drive(y,x,z, m_drivetrain.getHeading(), slider);
+   m_drivetrain.drive(y,x,z, m_drivetrain.getHeading(), slider, correction);
   }
 
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_drivetrain.drive(0.0,0.0,0.0,0.0,0.0);
+    m_drivetrain.drive(0.0,0.0,0.0,0.0,0.0, correction);
   }
   // Returns true when the command should end.
   @Override
