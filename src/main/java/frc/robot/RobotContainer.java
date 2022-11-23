@@ -67,8 +67,13 @@ public class RobotContainer {
     JoystickButton ldrop = new JoystickButton(m_Copilote, 1);
     JoystickButton rdrop = new JoystickButton(m_Copilote, 2);
 <<<<<<< HEAD
+<<<<<<< HEAD
     JoystickButton satnousdown_jo = new JoystickButton( m_Copilote, 8);//copilote
     JoystickButton satnousup_jo = new JoystickButton( m_Copilote, 9);//copilote
+=======
+    JoystickButton satnousdown_jo = new JoystickButton( m_Joystick, 11);//copilote
+    JoystickButton satnousup_jo = new JoystickButton( m_Joystick, 12);//copilote
+>>>>>>> parent of 2ef8b21 (stanous boutton)
 =======
     JoystickButton satnousdown_jo = new JoystickButton( m_Joystick, 11);//copilote
     JoystickButton satnousup_jo = new JoystickButton( m_Joystick, 12);//copilote
